@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_supabase/helper/date_helper.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CreateScreen extends StatefulWidget {
@@ -34,6 +35,7 @@ class _CreateScreenState extends State<CreateScreen> {
         {
           'title': titleController.text,
           'user_id': userId,
+          'device_id': resiDate(DateTime.now()),
         },
       );
       if (!mounted) return;
@@ -43,8 +45,8 @@ class _CreateScreenState extends State<CreateScreen> {
         isLoading = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Something went wrong"),
+        SnackBar(
+          content: Text(e.toString()),
           backgroundColor: Colors.red,
         ),
       );

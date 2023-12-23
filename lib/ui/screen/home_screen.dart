@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_supabase/ui/screen/CRUD/create_screen.dart';
 import 'package:flutter_supabase/ui/screen/crud/update_screen.dart';
+import 'package:flutter_supabase/ui/screen/crud/upload_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -42,8 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Supabase Flutter'),
-        centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () async {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UploadScreen()));
+            },
+            icon: const Icon(Icons.upload_file_outlined),
+          ),
           IconButton(
             onPressed: () async {
               await supabase.auth.signOut();
@@ -70,7 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 return ListTile(
                   title: Text(data['title']),
-                  subtitle: Text(data['created_at']),
+                  subtitle:
+                      Text(data['device_id'] ?? 'Tanggal tidak ditemukan'),
                   trailing: IconButton(
                     onPressed: () {
                       Navigator.push(

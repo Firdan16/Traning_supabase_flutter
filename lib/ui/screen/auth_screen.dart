@@ -34,6 +34,6 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return user == null ? const StartScreen() : HomeScreen();
+    return user == null ? StartScreen() : const HomeScreen();
   }
 }
